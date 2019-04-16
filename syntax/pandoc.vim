@@ -210,19 +210,19 @@ syn match pandocHTML /<\/\?\a.\{-}>/ contains=@HTML
 " Support HTML multi line comments
 syn region pandocHTMLComment start=/<!--\s\=/ end=/\s\=-->/ keepend contains=pandocHTMLCommentStart,pandocHTMLCommentEnd
 call s:WithConceal('html_c_s', 'syn match pandocHTMLCommentStart /<!--/ contained', 'conceal cchar='.s:cchars['html_c_s'])
-call s:WithConceal('html_c_e', 'syn match pandocHTMLCommentEnd /-->/ contained', 'conceal cchar='.s:cchars['html_c_e'])
-" }}}
-" LaTeX: {{{3
-" Set embedded LaTex (pandoc extension) highlighting
-" Unset current_syntax so the 2nd include will work
-unlet b:current_syntax
-syn include @LATEX syntax/tex.vim
-syn region pandocLaTeXInlineMath start=/\v\\@<!\$\S@=/ end=/\v\\@<!\$\d@!/ keepend contains=@LATEX
-syn region pandocLaTeXInlineMath start=/\\\@<!\\(/ end=/\\\@<!\\)/ keepend contains=@LATEX
-syn match pandocProtectedFromInlineLaTeX /\\\@<!\${.*}\(\(\s\|[[:punct:]]\)\([^$]*\|.*\(\\\$.*\)\{2}\)\n\n\|$\)\@=/ display
-" contains=@LATEX
-syn region pandocLaTeXMathBlock start=/\$\$/ end=/\$\$/ keepend contains=@LATEX
-syn region pandocLaTeXMathBlock start=/\\\@<!\\\[/ end=/\\\@<!\\\]/ keepend contains=@LATEX
+"call s:WithConceal('html_c_e', 'syn match pandocHTMLCommentEnd /-->/ contained', 'conceal cchar='.s:cchars['html_c_e'])
+"" }}}
+"" LaTeX: {{{3
+"" Set embedded LaTex (pandoc extension) highlighting
+"" Unset current_syntax so the 2nd include will work
+"unlet b:current_syntax
+"syn include @LATEX syntax/tex.vim
+"syn region pandocLaTeXInlineMath start=/\v\\@<!\$\S@=/ end=/\v\\@<!\$\d@!/ keepend contains=@LATEX
+"syn region pandocLaTeXInlineMath start=/\\\@<!\\(/ end=/\\\@<!\\)/ keepend contains=@LATEX
+"syn match pandocProtectedFromInlineLaTeX /\\\@<!\${.*}\(\(\s\|[[:punct:]]\)\([^$]*\|.*\(\\\$.*\)\{2}\)\n\n\|$\)\@=/ display
+"" contains=@LATEX
+"syn region pandocLaTeXMathBlock start=/\$\$/ end=/\$\$/ keepend contains=@LATEX
+"syn region pandocLaTeXMathBlock start=/\\\@<!\\\[/ end=/\\\@<!\\\]/ keepend contains=@LATEX
 syn match pandocLaTeXCommand /\\[[:alpha:]]\+\(\({.\{-}}\)\=\(\[.\{-}\]\)\=\)*/ contains=@LATEX 
 syn region pandocLaTeXRegion start=/\\begin{\z(.\{-}\)}/ end=/\\end{\z1}/ keepend contains=@LATEX
 " we rehighlight sectioning commands, because otherwise tex.vim captures all text until EOF or a new sectioning command
